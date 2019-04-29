@@ -1,0 +1,1 @@
+Get-Adcomputer -filter * -property * | select-object name,status,created,modified,distinguishedname | export-csv -path C:\getcomputers.csv
