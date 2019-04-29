@@ -1,0 +1,16 @@
+$found = (Get-ItemProperty -Path "HKCU:\Environment") -match "LM_LICENSE_FILE"
+
+if ($found -eq "false"){
+
+New-ItemProperty -Path 'Hklm:\System\CurrentControlSet\Control\Session Manager\Environment' `
+  -Name "LM_LICENSE_FILE" 
+
+}
+
+if((Get-ItemProperty -path 'Hklm:\System\CurrentControlSet\Control\Session Manager\Environment' `
+ -name LM_LICENSE_FILE) -notmatch "27000@test.university.com"){
+
+ $variable = "27000@test.university.com"
+ set-itemproperty -Path 'HKCU\Environment' -name "LM_LICENSE_FILE" -Value $variable
+
+}
